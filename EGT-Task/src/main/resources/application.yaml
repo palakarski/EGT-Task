@@ -1,0 +1,26 @@
+server:
+  port: ${PORT:8080}
+
+spring:
+  datasource:
+    password: ${MY_SQL_PASSWORD:root}
+    username: ${MY_SQL_USERNAME:root}
+    url: ${MY_SQL_URL:jdbc:mysql://localhost:3306/egt_task?useLegacyDatetimeCode=false&serverTimezone=UTC}
+    driver-class-name: ${MY_SQL_DRIVER:com.mysql.cj.jdbc.Driver}
+  jpa:
+    show-sql: ${SHOW_SQL:true}
+    properties:
+      hibernate:
+        dialect: ${HIBERNATE_DIALECT:org.hibernate.dialect.MySQL5Dialect}
+        jdbc:
+          time_zone: ${HIBERNATE_TIME_ZONE:UTC}
+    hibernate:
+      ddl-auto: ${DDL_AUTO_CONFIGURATION:update}
+
+myapp:
+  fixer:
+    access-key: ${FIXER_ACCESS_KEY:6c5debff5001470c7f1a80630259b358}
+    base-url: ${FIXER_BASE_URL:http://data.fixer.io/api/}
+    access-parameter: ${FIXER_ACCESS_PARAMETER:?access_key=}
+  scheduling:
+    period: ${SCHEDULING_PERIOD:0 */5 * * * *}

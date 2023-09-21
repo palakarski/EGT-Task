@@ -1,0 +1,154 @@
+{
+	"info": {
+		"_postman_id": "5aee1534-319a-4007-baef-9531a393b082",
+		"name": "EGT-task",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20377706",
+		"_collection_link": "https://bold-sunset-85699.postman.co/workspace/My-Workspace~b45cb4bd-8bd1-4d29-83ef-d94b48e16a8b/collection/20377706-5aee1534-319a-4007-baef-9531a393b082?action=share&source=collection_link&creator=20377706"
+	},
+	"item": [
+		{
+			"name": "Get Current Rate Json",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"requestId\": \"b89577fe-8c2337-4962-82af3-7cb89a245160\",\r\n\"timestamp\": 1586335186721,\r\n\"client\": \"123243\",\r\n\"currency\":\"EUR\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUIrl}}json_api/current",
+					"host": [
+						"{{baseUIrl}}json_api"
+					],
+					"path": [
+						"current"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Period Rate Json",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"requestId\": \"b89577fe-222-222-8a32f323-7cb82222a2245160\",\r\n\"timestamp\": 1586335186721, // UTC\r\n\"client\": \"1234\",\r\n\"currency\":\"TRY\",\r\n\"period\":5000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUIrl}}json_api/period",
+					"host": [
+						"{{baseUIrl}}json_api"
+					],
+					"path": [
+						"period"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Current Rate XML",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "<command id=\"1234\">\r\n    <get consumer=\"13617162\">\r\n        <currency>EUR</currency>\r\n    </get>\r\n</command>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUIrl}}xml_api/command",
+					"host": [
+						"{{baseUIrl}}xml_api"
+					],
+					"path": [
+						"command"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Period Rate XML",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "<command id=\"1234-82785\">\r\n    <history consumer=\"1361372162\" currency=\"EUR\" period=\"22\" />\r\n</command>\r\n",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUIrl}}xml_api/command",
+					"host": [
+						"{{baseUIrl}}xml_api"
+					],
+					"path": [
+						"command"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUIrl",
+			"value": "http://localhost:8080/",
+			"type": "string"
+		}
+	]
+}
