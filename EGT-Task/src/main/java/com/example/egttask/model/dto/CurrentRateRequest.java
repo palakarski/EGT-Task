@@ -3,20 +3,19 @@ package com.example.egttask.model.dto;
 import com.example.egttask.enumeration.CurrencyType;
 import com.example.egttask.utils.CustomTimestampDeserializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import jakarta.annotation.Nonnull;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 @Data
-@Builder
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class CurrentRateRequest {
+public class CurrentRateRequest implements CommonRequest {
 
     @NotBlank(message = "Request Id is mandatory")
     private String requestId;
@@ -27,6 +26,10 @@ public class CurrentRateRequest {
     private String client;
     @NotNull(message = "Currency is mandatory")
     private CurrencyType currency;
-    private Integer period;
 
+
+    @Override
+    public String getCustomerId() {
+        return client;
+    }
 }

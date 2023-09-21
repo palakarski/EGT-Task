@@ -3,6 +3,7 @@ package com.example.egttask.service.impl;
 import com.example.egttask.exception.BadRequestException;
 import com.example.egttask.model.dto.CurrentRateRequest;
 import com.example.egttask.model.dto.CurrentRateResponse;
+import com.example.egttask.model.dto.PeriodRateRequest;
 import com.example.egttask.model.entity.ExchangeRateEntity;
 import com.example.egttask.repository.ExchangeRateRepository;
 import com.example.egttask.service.ExchangeRateService;
@@ -28,14 +29,14 @@ public class ExchangeRateServiceImpl implements ExchangeRateService {
     }
 
     @Override
-    public List<CurrentRateResponse> getExchangeRateForPeriod(CurrentRateRequest currentRateRequest) {
+    public List<CurrentRateResponse> getExchangeRateForPeriod(PeriodRateRequest periodRateRequest) {
 
         var entityList = exchangeRateRepository.findAllByTimestampIsAfter(
-                LocalDateTime.now().minus(Duration.ofHours(currentRateRequest.getPeriod())))
+                LocalDateTime.now().minus(Duration.ofHours(periodRateRequest.getPeriod())))
             .orElseThrow(() -> new BadRequestException("Data is missing"));
         List<CurrentRateResponse> listResponse = new ArrayList<>();
         for (ExchangeRateEntity entity : entityList) {
-            listResponse.add(Mapper.mapCurrentResponse(entity, currentRateRequest));
+            listResponse.add(Mapper.mapCurrentResponse(entity, periodRateRequest));
         }
 
         return listResponse;
