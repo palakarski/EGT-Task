@@ -5,11 +5,13 @@ import static com.example.egttask.utils.Constants.JSON_API;
 import static com.example.egttask.utils.Constants.PERIOD;
 import static java.util.Objects.isNull;
 
+import com.example.egttask.exception.BadRequestException;
 import com.example.egttask.model.dto.CurrentRateRequest;
 import com.example.egttask.model.dto.CurrentRateResponse;
 import com.example.egttask.service.ExchangeRateService;
 import com.example.egttask.service.RequestService;
 import com.example.egttask.utils.RequestValidator;
+import jakarta.validation.Valid;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
@@ -29,20 +31,18 @@ public class JsonApiController {
     private final RequestValidator requestValidator;
 
     @GetMapping(value = CURRENT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<CurrentRateResponse> getCurrentRate(@RequestBody CurrentRateRequest currentRateRequest) {
+    public ResponseEntity<CurrentRateResponse> getCurrentRate(@Valid @RequestBody CurrentRateRequest currentRateRequest) {
         requestValidator.validateAndSave(currentRateRequest);
-        if (isNull(currentRateRequest.getPeriod())) {
-            return ResponseEntity.ok(statisticCollectorService.getCurrentExchangeRate(currentRateRequest));
-
-        }
-        return null;
+        return ResponseEntity.ok(statisticCollectorService.getCurrentExchangeRate(currentRateRequest));
     }
 
     @GetMapping(value = PERIOD, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<CurrentRateResponse>> getPeriodRate(@RequestBody CurrentRateRequest currentRateRequest) {
+    public ResponseEntity<List<CurrentRateResponse>> getPeriodRate(@Valid @RequestBody CurrentRateRequest currentRateRequest) {
 
         requestValidator.validateAndSave(currentRateRequest);
-
+        if (isNull(currentRateRequest.getPeriod())) {
+            throw new BadRequestException("Period cannot be null");
+        }
         return ResponseEntity.ok(statisticCollectorService.getExchangeRateForPeriod(currentRateRequest));
 
 

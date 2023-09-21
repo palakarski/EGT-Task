@@ -12,6 +12,7 @@ import com.example.egttask.model.dto.HistoryXMLRequest;
 import com.example.egttask.service.ExchangeRateService;
 import com.example.egttask.service.RequestService;
 import com.example.egttask.utils.RequestValidator;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -30,7 +31,7 @@ public class XmlApiController {
     private final RequestValidator requestValidator;
 
     @GetMapping(value = COMMAND, consumes = MediaType.APPLICATION_XML_VALUE, produces = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<Object> handleXmlRequest(@RequestBody CommandRequest commandRequest) throws Exception {
+    public ResponseEntity<Object> handleXmlRequest(@Valid @RequestBody CommandRequest commandRequest) throws Exception {
 
         String id = commandRequest.getId();
         CurrentXMLRequest currentXMLRequest;

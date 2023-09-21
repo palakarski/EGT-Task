@@ -1,5 +1,6 @@
 package com.example.egttask.model.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -12,7 +13,9 @@ import lombok.Data;
 public class CurrentXMLRequest {
 
     @XmlElement(name = "consumer")
+    @NotBlank(message = "Consumer Id is mandatory")
     private String consumer;
+    @NotBlank(message = "Currency Id is mandatory")
     @XmlElement(name = "currency")
     private String currency;
 
